@@ -1,860 +1,142 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Guide Tournoi — Lucy OP15</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --red: #C0392B;
-  --red-dark: #96281B;
-  --red-light: #E8534A;
-  --blue: #1A5276;
-  --blue-light: #2E86C1;
-  --gold: #D4AC0D;
-  --gold-light: #F9E55A;
-  --cream: #FDF6E3;
-  --dark: #0D0D0D;
-  --dark2: #1A1A1A;
-  --dark3: #242424;
-  --dark4: #2E2E2E;
-  --mid: #404040;
-  --text: #E8E0D0;
-  --text2: #A09880;
-  --text3: #6B6050;
-  --border: rgba(212,172,13,0.2);
-  --border2: rgba(212,172,13,0.08);
-  --r: 10px;
-  --rs: 6px;
-  --gap: 10px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--dark);
-  color:var(--text);
-  font-size:15px;
-  line-height:1.6;
-  min-height:100vh;
-  overflow-x:hidden;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GUIDE LUCY OP15 — STRATÉGIE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Pirata+One&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #C0392B; --red-light: #E8534A; --gold: #D4AC0D; --dark: #0D0D0D;
+            --dark2: #1A1A1A; --text: #E8E0D0; --text2: #A09880; --border: rgba(212,172,13,0.3);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text);
+            line-height: 1.5; overflow-x: hidden;
+        }
+        /* Style One Piece */
+        h1, h2, .sec-title, .combo-name { font-family: 'Pirata One', system-ui; letter-spacing: 1px; }
+        .hero { padding: 40px 20px; text-align: center; border-bottom: 2px solid var(--gold); background: linear-gradient(to bottom, #2c0000, var(--dark)); }
+        .hero h1 { font-size: 60px; color: var(--gold); text-shadow: 2px 2px 0px #000; line-height: 1; }
+        .hero span { color: #fff; font-size: 24px; display: block; font-family: 'Bebas Neue'; }
 
-/* ── BG TEXTURE ── */
-body::before{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(192,57,43,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(26,82,118,0.1) 0%, transparent 60%);
-  pointer-events:none;z-index:0;
-}
+        main { max-width: 500px; margin: 0 auto; padding: 15px; }
 
-/* ── HEADER ── */
-.hero{
-  position:relative;z-index:1;
-  padding:32px 16px 24px;
-  text-align:center;
-  border-bottom:1px solid var(--border);
-}
-.hero-eyebrow{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;letter-spacing:0.2em;
-  color:var(--gold);text-transform:uppercase;
-  margin-bottom:10px;
-}
-.hero h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:52px;letter-spacing:0.04em;
-  line-height:1;
-  color:#fff;
-  text-shadow:0 0 40px rgba(192,57,43,0.5);
-}
-.hero h1 span{color:var(--red-light);}
-.hero-sub{
-  margin-top:10px;font-size:13px;
-  color:var(--text2);
-}
-.hero-badges{
-  display:flex;justify-content:center;gap:8px;
-  flex-wrap:wrap;margin-top:14px;
-}
-.hbadge{
-  font-size:11px;font-weight:500;
-  padding:3px 10px;border-radius:20px;
-  border:1px solid;letter-spacing:0.03em;
-}
-.hb-red{border-color:var(--red);color:var(--red-light);background:rgba(192,57,43,0.1);}
-.hb-blue{border-color:var(--blue-light);color:#5DADE2;background:rgba(26,82,118,0.15);}
-.hb-gold{border-color:var(--gold);color:var(--gold);background:rgba(212,172,13,0.08);}
+        /* Navigation Mobile */
+        .nav { sticky: top; top: 0; z-index: 100; background: rgba(13,13,13,0.95); display: flex; overflow-x: auto; padding: 10px; border-bottom: 1px solid var(--border); }
+        .nav a { color: var(--text2); text-decoration: none; padding: 5px 12px; font-size: 12px; white-space: nowrap; font-family: 'JetBrains Mono'; }
 
-/* ── MAIN LAYOUT ── */
-main{position:relative;z-index:1;padding:16px;max-width:520px;margin:0 auto;}
+        /* Sections */
+        .section { margin-bottom: 35px; border-radius: 12px; background: var(--dark2); padding: 15px; border: 1px solid var(--border); }
+        .sec-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .sec-title { font-size: 28px; color: var(--gold); }
+        
+        /* Grid Cartes */
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 15px 0; }
+        .tcg-card { text-align: center; }
+        .tcg-card img { width: 100%; border-radius: 5px; border: 1px solid var(--gold); transition: transform 0.2s; }
+        .tcg-card p { font-size: 9px; margin-top: 4px; color: var(--text2); font-family: 'JetBrains Mono'; }
 
-/* ── SECTION ── */
-.section{margin-bottom:28px;}
-.sec-header{
-  display:flex;align-items:center;gap:10px;
-  margin-bottom:14px;
-  padding-bottom:10px;
-  border-bottom:1px solid var(--border2);
-}
-.sec-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:28px;line-height:1;
-  color:var(--red);min-width:28px;
-}
-.sec-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:20px;letter-spacing:0.06em;
-  color:#fff;flex:1;
-}
-.memo{
-  display:inline-block;
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;color:var(--gold);
-  background:rgba(212,172,13,0.08);
-  border:1px solid rgba(212,172,13,0.2);
-  border-radius:20px;padding:3px 10px;
-  letter-spacing:0.04em;margin-top:6px;
-}
+        /* Éléments de guide */
+        .memo { background: rgba(212,172,13,0.1); color: var(--gold); padding: 8px; border-radius: 5px; font-family: 'JetBrains Mono'; font-size: 11px; margin-bottom: 15px; display: block; border-left: 3px solid var(--gold); }
+        .card-box { background: #242424; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--red); }
+        .card-box h3 { font-size: 16px; margin-bottom: 5px; color: #fff; }
+        .card-box p { font-size: 13px; color: var(--text2); }
 
-/* ── CARD COMPONENTS ── */
-.card{
-  background:var(--dark2);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:14px;
-}
-.card-accent-red{border-left:3px solid var(--red);}
-.card-accent-blue{border-left:3px solid var(--blue-light);}
-.card-accent-gold{border-left:3px solid var(--gold);}
-.card-accent-teal{border-left:3px solid #1ABC9C;}
-
-.card h3{font-size:13px;font-weight:600;margin-bottom:5px;color:#fff;}
-.card p,.card li{font-size:13px;color:var(--text2);line-height:1.55;}
-.card ul{padding-left:16px;}
-.card li{margin-bottom:3px;}
-
-/* ── DON TIMELINE ── */
-.don-timeline{display:flex;flex-direction:column;gap:2px;}
-.don-item{
-  display:flex;align-items:stretch;gap:0;
-}
-.don-line{
-  display:flex;flex-direction:column;align-items:center;
-  width:44px;flex-shrink:0;
-}
-.don-badge{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:16px;
-  width:40px;height:40px;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;border:2px solid;
-  letter-spacing:0.02em;
-}
-.don-connector{width:2px;flex:1;min-height:6px;}
-.db1{border-color:var(--blue-light);background:rgba(46,134,193,0.12);color:var(--blue-light);}
-.dc1{background:rgba(46,134,193,0.2);}
-.db2{border-color:#1ABC9C;background:rgba(26,188,156,0.1);color:#1ABC9C;}
-.dc2{background:rgba(26,188,156,0.2);}
-.db3{border-color:#9B59B6;background:rgba(155,89,182,0.1);color:#C39BD3;}
-.dc3{background:rgba(155,89,182,0.2);}
-.db4{border-color:var(--gold);background:rgba(212,172,13,0.1);color:var(--gold);}
-.dc4{background:rgba(212,172,13,0.2);}
-.db5{border-color:var(--red-light);background:rgba(192,57,43,0.15);color:var(--red-light);}
-.don-content{
-  flex:1;
-  background:var(--dark2);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:10px 14px;
-  margin-left:10px;margin-bottom:8px;
-}
-.don-content h4{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;}
-.don-content p{font-size:12px;color:var(--text2);line-height:1.5;}
-
-/* ── CARD IMAGES GRID ── */
-.cards-strip{
-  display:flex;gap:8px;overflow-x:auto;
-  padding:4px 0 10px;
-  scrollbar-width:none;
-}
-.cards-strip::-webkit-scrollbar{display:none;}
-.tcg-card{
-  flex-shrink:0;
-  width:80px;
-  position:relative;
-}
-.tcg-card img{
-  width:80px;
-  border-radius:6px;
-  border:1px solid rgba(212,172,13,0.25);
-  display:block;
-  box-shadow:0 4px 12px rgba(0,0,0,0.4);
-  transition:transform 0.2s;
-}
-.tcg-card:active img{transform:scale(1.05);}
-.tcg-card .card-name{
-  font-size:9px;color:var(--text3);
-  text-align:center;margin-top:4px;
-  font-family:'JetBrains Mono',monospace;
-  letter-spacing:0.02em;
-}
-.tcg-card .card-role{
-  position:absolute;top:4px;right:4px;
-  background:rgba(0,0,0,0.75);
-  border:1px solid rgba(212,172,13,0.3);
-  font-size:8px;color:var(--gold);
-  padding:1px 4px;border-radius:3px;
-  font-family:'JetBrains Mono',monospace;
-  letter-spacing:0.03em;
-}
-
-/* ── GRID LAYOUTS ── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);}
-.g1{display:flex;flex-direction:column;gap:var(--gap);}
-
-/* ── TRASH ITEMS ── */
-.trash-list{display:flex;flex-direction:column;gap:6px;}
-.trash-item{
-  display:flex;align-items:center;gap:12px;
-  padding:10px 12px;
-  border-radius:var(--rs);
-  border:1px solid;
-}
-.ti-ok{border-color:rgba(26,188,156,0.2);background:rgba(26,188,156,0.05);}
-.ti-warn{border-color:rgba(212,172,13,0.2);background:rgba(212,172,13,0.05);}
-.ti-no{border-color:rgba(192,57,43,0.3);background:rgba(192,57,43,0.08);}
-.trash-item .ti-label{
-  font-family:'JetBrains Mono',monospace;
-  font-size:9px;font-weight:500;
-  letter-spacing:0.08em;text-transform:uppercase;
-  min-width:70px;
-}
-.tl-ok{color:#1ABC9C;}
-.tl-warn{color:var(--gold);}
-.tl-no{color:var(--red-light);}
-.trash-item p{font-size:12px;color:var(--text2);line-height:1.4;}
-
-/* ── COMBO BLOCKS ── */
-.combo-block{
-  background:var(--dark2);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:14px;
-  margin-bottom:var(--gap);
-}
-.combo-name{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:18px;letter-spacing:0.05em;
-  margin-bottom:8px;
-}
-.combo-chain{
-  display:flex;flex-wrap:wrap;align-items:center;gap:6px;
-  margin-bottom:8px;
-}
-.cc{
-  background:var(--dark3);
-  border:1px solid var(--border);
-  border-radius:5px;
-  padding:4px 9px;
-  font-size:12px;font-weight:500;color:#fff;
-}
-.carr{font-size:14px;color:var(--text3);}
-.combo-result{
-  display:inline-flex;align-items:center;gap:5px;
-  background:rgba(26,188,156,0.1);
-  border:1px solid rgba(26,188,156,0.2);
-  border-radius:5px;padding:3px 9px;
-  font-size:11px;color:#1ABC9C;font-weight:500;
-  margin-bottom:6px;
-}
-.combo-note{font-size:12px;color:var(--text2);}
-.cn-red .combo-name{color:var(--red-light);}
-.cn-gold .combo-name{color:var(--gold);}
-.cn-blue .combo-name{color:#5DADE2;}
-.cn-teal .combo-name{color:#1ABC9C;}
-
-/* ── MATCHUP CARDS ── */
-.mu-card{
-  background:var(--dark2);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:14px;
-  margin-bottom:var(--gap);
-}
-.mu-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.mu-name{font-weight:600;font-size:14px;color:#fff;}
-.mu-pct{font-size:11px;color:var(--text3);margin-left:auto;font-family:'JetBrains Mono',monospace;}
-.mu-verdict{
-  font-size:11px;font-weight:600;
-  padding:3px 9px;border-radius:20px;
-  letter-spacing:0.04em;margin-bottom:8px;display:inline-block;
-}
-.vf{background:rgba(26,188,156,0.12);color:#1ABC9C;border:1px solid rgba(26,188,156,0.25);}
-.vj{background:rgba(212,172,13,0.1);color:var(--gold);border:1px solid rgba(212,172,13,0.2);}
-.mu-card ul{padding-left:16px;}
-.mu-card li{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:2px;}
-.mu-card li strong{color:var(--text);}
-
-/* ── NAMI PROTOCOL ── */
-.nami-box{
-  background:rgba(192,57,43,0.06);
-  border:1px solid rgba(192,57,43,0.2);
-  border-radius:var(--r);padding:14px;
-}
-.nami-box h4{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:16px;color:var(--red-light);
-  letter-spacing:0.06em;margin-bottom:10px;
-}
-.nami-rule{
-  display:flex;align-items:flex-start;gap:10px;
-  margin-bottom:8px;
-}
-.nr-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:20px;color:var(--red);
-  min-width:18px;line-height:1.1;
-}
-.nr-text{font-size:12px;color:var(--text2);line-height:1.5;}
-.nr-text strong{color:var(--text);}
-
-/* ── TIPS BLOCK ── */
-.tip-row{display:flex;flex-direction:column;gap:var(--gap);}
-.tip-card{
-  background:var(--dark2);
-  border:1px solid var(--border2);
-  border-radius:var(--r);
-  padding:14px;
-}
-.tip-card h4{font-size:13px;font-weight:600;color:#fff;margin-bottom:8px;}
-.tip-card ul{padding-left:16px;}
-.tip-card li{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:2px;}
-.tip-card li strong{color:var(--text);}
-
-/* ── MULLIGAN BOX ── */
-.mull-grid{display:flex;flex-direction:column;gap:6px;}
-.mull-item{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:9px 12px;border-radius:var(--rs);
-}
-.mi-keep{background:rgba(26,188,156,0.06);border:1px solid rgba(26,188,156,0.15);}
-.mi-reject{background:rgba(192,57,43,0.06);border:1px solid rgba(192,57,43,0.15);}
-.mi-nami{background:rgba(26,82,118,0.1);border:1px solid rgba(46,134,193,0.2);}
-.mi-icon{font-size:14px;min-width:18px;line-height:1.5;}
-.mi-text{font-size:12px;color:var(--text2);line-height:1.5;}
-.mi-text strong{color:var(--text);}
-
-/* ── DIVIDER ── */
-.div{height:1px;background:var(--border2);margin:6px 0;}
-
-/* ── FOOTER ── */
-footer{
-  text-align:center;padding:24px 16px;
-  border-top:1px solid var(--border2);
-  position:relative;z-index:1;
-}
-footer p{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.section{animation:fadeUp 0.4s ease both;}
-.section:nth-child(1){animation-delay:0.05s}
-.section:nth-child(2){animation-delay:0.1s}
-.section:nth-child(3){animation-delay:0.15s}
-.section:nth-child(4){animation-delay:0.2s}
-.section:nth-child(5){animation-delay:0.25s}
-.section:nth-child(6){animation-delay:0.3s}
-.section:nth-child(7){animation-delay:0.35s}
-
-/* ── NAV ── */
-.nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(13,13,13,0.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border2);
-  padding:0 16px;
-  overflow-x:auto;scrollbar-width:none;
-}
-.nav::-webkit-scrollbar{display:none;}
-.nav-inner{display:flex;gap:2px;min-width:max-content;padding:8px 0;}
-.nav a{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10px;letter-spacing:0.05em;
-  color:var(--text3);text-decoration:none;
-  padding:5px 10px;border-radius:5px;
-  transition:color 0.2s,background 0.2s;
-  white-space:nowrap;
-}
-.nav a:hover{color:var(--gold);background:rgba(212,172,13,0.08);}
-
-/* ── SCROLL TARGET OFFSET ── */
-.scroll-target{scroll-margin-top:50px;}
-
-/* ── HIGHLIGHT ── */
-em{font-style:normal;color:var(--gold);font-weight:500;}
-</style>
+        /* Timeline DON */
+        .timeline-step { display: flex; gap: 15px; margin-bottom: 15px; }
+        .step-num { background: var(--red); color: #fff; min-width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Bebas Neue'; }
+        
+        .footer { text-align: center; padding: 40px; font-size: 11px; color: var(--text3); opacity: 0.5; }
+    </style>
 </head>
 <body>
 
 <div class="hero">
-  <p class="hero-eyebrow">Guide Tournoi Officiel · OP15 · Avril 2026</p>
-  <h1>LUCY<br><span>OP15-002</span></h1>
-  <p class="hero-sub">Dressrosa · Armée Révolutionnaire · Format OP15 · 64 joueurs</p>
-  <div class="hero-badges">
-    <span class="hbadge hb-red">Tier S · #3 méta</span>
-    <span class="hbadge hb-blue">Events synergy</span>
-    <span class="hbadge hb-gold">~30€ · Full Commons</span>
-  </div>
+    <h1>LUCY</h1>
+    <span>STRATÉGIE OFFICIELLE OP15</span>
 </div>
 
-<nav class="nav" aria-label="Navigation sections">
-  <div class="nav-inner">
-    <a href="#s1">01 · Courbe</a>
-    <a href="#s2">02 · Tempo</a>
-    <a href="#s3">03 · Défense</a>
-    <a href="#s4">04 · Trash</a>
-    <a href="#s5">05 · Combos</a>
-    <a href="#s6">06 · Matchups</a>
-    <a href="#s7">07 · Champion</a>
-  </div>
-</nav>
+<div class="nav">
+    <a href="#courbe">COURBE</a>
+    <a href="#tempo">TEMPO</a>
+    <a href="#defense">DÉFENSE</a>
+    <a href="#combos">COMBOS</a>
+    <a href="#matchups">MATCHUPS</a>
+</div>
 
 <main>
-
-<!-- ─────────── 01 COURBE ─────────── -->
-<section class="section scroll-target" id="s1">
-  <div class="sec-header">
-    <span class="sec-num">01</span>
-    <span class="sec-title">La courbe d'or</span>
-  </div>
-  <p class="memo">Mémo · 1 → 3 → 5 → 7 → MAX</p>
-
-  <!-- Cartes clés -->
-  <div class="cards-strip" style="margin:14px 0 6px;" aria-label="Cartes clés de la courbe">
-    <div class="tcg-card">
-      <span class="card-role">1 Don</span>
-      <img src="images/dres.png" alt="Dressrosa Kingdom" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Royaume de Dressrosa - OP15-057</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">1 Don</span>
-      <img src="images/viola.png" alt="Viola" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Viola - OP15-040</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">1 Don</span>
-      <img src="images/rebecca.png" alt="Rebecca" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Rebecca - OP15-053</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">4 Don</span>
-      <img src="images/bartolomeo.png" alt="Bartolomeo" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Bartolomeo - OP15-014</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">4 Don</span>
-      <img src="images/cavendish.png" alt="Cavendish" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Cavendish - OP10-045</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">7 Don</span>
-      <img src="images/sabo_046.png" alt="Sabo" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Sabo - OP15-046</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">Leader</span>
-      <img src="images/lucy.png" alt="Lucy Leader" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">Lucy - OP15-002</p>
-    </div>
-  </div>
-
-  <div class="don-timeline">
-    <div class="don-item">
-      <div class="don-line">
-        <div class="don-badge db1">1</div>
-        <div class="don-connector dc1"></div>
-      </div>
-      <div class="don-content">
-        <h4>Fondation</h4>
-        <p><em>Dressrosa Kingdom</em> en priorité absolue. Sinon Viola ou Rebecca pour commencer à chercher.</p>
-      </div>
-    </div>
-    <div class="don-item">
-      <div class="don-line">
-        <div class="don-badge db2">3</div>
-        <div class="don-connector dc2"></div>
-      </div>
-      <div class="don-content">
-        <h4>Cycle du Stage</h4>
-        <p>Trash un Event → Pioche. Pose une chercheuse. Garde <em>2 Don ouverts</em> — menace de Fire Fist.</p>
-      </div>
-    </div>
-    <div class="don-item">
-      <div class="don-line">
-        <div class="don-badge db3">5</div>
-        <div class="don-connector dc3"></div>
-      </div>
-      <div class="don-content">
-        <h4>L'Ancre</h4>
-        <p>Pose <em>Cavendish</em> (draw engine) ou <em>Bartolomeo</em> (Event gratuit). Active l'effet immédiatement.</p>
-      </div>
-    </div>
-    <div class="don-item">
-      <div class="don-line">
-        <div class="don-badge db4">7</div>
-        <div class="don-connector dc4"></div>
-      </div>
-      <div class="don-content">
-        <h4>Le Boss</h4>
-        <p><em>Sabo 9000 Blocker</em>. Active l'Event gratuit. Le board est stabilisé.</p>
-      </div>
-    </div>
-    <div class="don-item">
-      <div class="don-line">
-        <div class="don-badge db5">10</div>
-      </div>
-      <div class="don-content">
-        <h4>L'Estocade</h4>
-        <p><em>+2000 sur chaque attaquant</em>. Trash 2–3 Events → Leader à 8000+. Ferme la partie via Sabo-Nuke.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── 02 TEMPO ─────────── -->
-<section class="section scroll-target" id="s2">
-  <div class="sec-header">
-    <span class="sec-num">02</span>
-    <span class="sec-title">Tempo — quand frapper</span>
-  </div>
-  <p class="memo">Mémo · P.A.L. — Persos d'Abord, puis le Leader</p>
-
-  <div class="g1" style="margin-top:14px;">
-    <div class="card card-accent-blue">
-      <h3>Persos avant Leader — toujours</h3>
-      <p>Lucy pioche en attaquant. Cette nouvelle carte peut changer tout ton plan de tour. Attaque toujours le Leader en dernier, après avoir traité ta main complète.</p>
-    </div>
-    <div class="card card-accent-gold">
-      <h3>La règle du +2000</h3>
-      <p>S'il est à 5000, frappe à <em>7000</em>. Force-le toujours à dépenser une carte pour contrer. Ne lui laisse jamais le luxe d'un chiffre rond.</p>
-    </div>
-    <div class="card card-accent-teal">
-      <h3>Se laisser frapper ?</h3>
-      <p><strong style="color:#1ABC9C;">Oui</strong> aux 2 premiers PV — tu as besoin de cartes en main et d'Events au Trash pour ton engine.<br>
-      <strong style="color:var(--red-light);">Non</strong> à partir de 2 PV restants : bascule en défense totale.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── 03 DÉFENSE ─────────── -->
-<section class="section scroll-target" id="s3">
-  <div class="sec-header">
-    <span class="sec-num">03</span>
-    <span class="sec-title">Protocole de défense</span>
-  </div>
-  <p class="memo">Mémo · "Sauve le moteur, laisse mourir l'huile"</p>
-
-  <div class="g1" style="margin-top:14px;">
-    <div class="card" style="border:1px solid rgba(26,188,156,0.25);background:rgba(26,188,156,0.05);">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span style="font-size:10px;font-weight:600;letter-spacing:0.08em;color:#1ABC9C;text-transform:uppercase;">À défendre absolument</span>
-      </div>
-      <h3 style="color:#1ABC9C;font-size:16px;margin-bottom:4px;">Cavendish</h3>
-      <p>S'il survit un tour complet, tu gagnes. Utilise contres ET Stage pour lui. Ne le sacrifie jamais pour économiser des ressources. C'est ton draw engine.</p>
-    </div>
-    <div class="card" style="border:1px solid rgba(160,152,128,0.2);">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span style="font-size:10px;font-weight:600;letter-spacing:0.08em;color:var(--text3);text-transform:uppercase;">À laisser mourir</span>
-      </div>
-      <h3 style="color:var(--text2);">Viola / Rebecca</h3>
-      <p>Leur effet On Play est déclenché — elles ont rempli leur rôle. Ne gaspille aucune carte pour les protéger après ça.</p>
-    </div>
-    <div class="card card-accent-red">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span style="font-size:10px;font-weight:600;letter-spacing:0.08em;color:var(--gold);text-transform:uppercase;">Ton bouclier passif</span>
-      </div>
-      <h3>Le Stage — priorité absolue</h3>
-      <p>Trash un Event <em>avant</em> de dépenser une carte de ta main. C'est un +2000 counter totalement gratuit. Utilise-le <em>systématiquement</em> à chaque défense.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── 04 TRASH ─────────── -->
-<section class="section scroll-target" id="s4">
-  <div class="sec-header">
-    <span class="sec-num">04</span>
-    <span class="sec-title">L'art du Trash</span>
-  </div>
-  <p class="memo">Mémo · "Petits d'abord, gros pour Sabo"</p>
-
-  <div class="trash-list" style="margin-top:14px;">
-    <div class="trash-item ti-ok">
-      <span class="ti-label tl-ok">Priorité 1</span>
-      <p><strong style="color:var(--text);">Doublons du Stage</strong> — inutilisables en double sur le terrain. Toujours trashables.</p>
-    </div>
-    <div class="trash-item ti-ok">
-      <span class="ti-label tl-ok">Priorité 2</span>
-      <p><strong style="color:var(--text);">Fire Fist OP05</strong> — facile à recycler, très utile tôt dans le Trash pour activer Just Watch Me.</p>
-    </div>
-    <div class="trash-item ti-warn">
-      <span class="ti-label tl-warn">Situationnel</span>
-      <p><strong style="color:var(--text);">Events 4–5 coût</strong> — garde si Sabo en main. Trash si tu as besoin d'accélérer ton draw.</p>
-    </div>
-    <div class="trash-item ti-no">
-      <span class="ti-label tl-no">Jamais</span>
-      <p><strong style="color:var(--text);">Viola / Sabo OP10</strong> (+2000 Counter) — uniquement si tu es certain de fermer <em>ce tour précis</em>.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── 05 COMBOS ─────────── -->
-<section class="section scroll-target" id="s5">
-  <div class="sec-header">
-    <span class="sec-num">05</span>
-    <span class="sec-title">Combos — Cheat Codes</span>
-  </div>
-  <p class="memo">Mémo · B.A.S.F. — Barto · Ace · Sniper · Final</p>
-
-  <!-- Cartes Events -->
-  <div class="cards-strip" style="margin:14px 0 6px;" aria-label="Cartes Events">
-    <div class="tcg-card">
-      <span class="card-role">4→1 Don</span>
-      <img src="https://en.onepiece-cardgame.com/images/cardlist/card/OP15-021.png" alt="Just Watch Me Ace" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">OP15-021</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">2 Don</span>
-      <img src="https://en.onepiece-cardgame.com/images/cardlist/card/OP05-019.png" alt="Fire Fist" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">OP05-019</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">7 Don</span>
-      <img src="https://en.onepiece-cardgame.com/images/cardlist/card/OP15-020.png" alt="Fire Fist OP15" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">OP15-020</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">5 Don</span>
-      <img src="https://en.onepiece-cardgame.com/images/cardlist/card/OP10-060.png" alt="Barrier-Barrier Pistol" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">OP10-060</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">1 Don</span>
-      <img src="https://en.onepiece-cardgame.com/images/cardlist/card/OP05-006.png" alt="Koala" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">OP05-006</p>
-    </div>
-    <div class="tcg-card">
-      <span class="card-role">4 Don</span>
-      <img src="https://en.onepiece-cardgame.com/images/cardlist/card/OP15-054.png" alt="And No One Else" loading="lazy" onerror="this.style.background='#1a1a1a';this.style.minHeight='110px';this.removeAttribute('src')">
-      <p class="card-name">OP15-054</p>
-    </div>
-  </div>
-
-  <div class="combo-block cn-blue">
-    <p class="combo-name">B — Barto Combo</p>
-    <div class="combo-chain">
-      <span class="cc">Bartolomeo 4-coût</span>
-      <span class="carr">→</span>
-      <span class="cc">Event gratuit (≤3)</span>
-      <span class="carr">→</span>
-      <span class="cc">Rebecca gratuite</span>
-    </div>
-    <div class="combo-result">Économie réelle : 5 Don</div>
-    <p class="combo-note">Active aussi la pioche du Leader sur sa prochaine attaque. Enchaîne dès le tour 5.</p>
-  </div>
-
-  <div class="combo-block cn-gold">
-    <p class="combo-name">A — Ace Économique</p>
-    <div class="combo-chain">
-      <span class="cc">4+ Events au Trash</span>
-      <span class="carr">→</span>
-      <span class="cc">Just Watch Me = 1 Don</span>
-    </div>
-    <div class="combo-result">Counter +3000 pour 1 Don</div>
-    <p class="combo-note">Garde <em>toujours 1 Don ouvert</em> quand tu as 4+ Events au Trash. C'est ton contour économique permanent.</p>
-  </div>
-
-  <div class="combo-block cn-teal">
-    <p class="combo-name">S — Sniper</p>
-    <div class="combo-chain">
-      <span class="cc">Koala −1000</span>
-      <span class="carr">→</span>
-      <span class="cc">Cible à 6000</span>
-      <span class="carr">→</span>
-      <span class="cc">BBP renvoi au fond</span>
-    </div>
-    <div class="combo-result">Élimine tout Perso à 7000 — sans trigger KO</div>
-    <p class="combo-note">Parfait contre Nico Robin de Nami. Évite son effet de trigger en tuant par renvoi au fond plutôt que par combat.</p>
-  </div>
-
-  <div class="combo-block cn-red">
-    <p class="combo-name">F — Final (Sabo-Nuke)</p>
-    <div class="combo-chain">
-      <span class="cc">Sabo OP15-046</span>
-      <span class="carr">→</span>
-      <span class="cc">Fire Fist OP15 gratuit</span>
-    </div>
-    <div class="combo-result">Leader +3000 / Perso adverse −8000</div>
-    <p class="combo-note">Trash 2 cartes → KO si power à 0. <strong style="color:var(--text);">C'est le coup de grâce du deck.</strong> Tout le game plan mène ici.</p>
-  </div>
-</section>
-
-<!-- ─────────── 06 MATCHUPS ─────────── -->
-<section class="section scroll-target" id="s6">
-  <div class="sec-header">
-    <span class="sec-num">06</span>
-    <span class="sec-title">Matchups clés</span>
-  </div>
-  <p class="memo">Méta OP15 Avril 2026</p>
-
-  <div style="margin-top:14px;">
-    <div class="mu-card">
-      <div class="mu-head">
-        <span class="mu-name">Enel violet</span>
-        <span class="mu-pct">44 % méta</span>
-      </div>
-      <span class="mu-verdict vf">Favorable</span>
-      <ul>
-        <li>BBP renvoie ses gros Enel 6-coût au fond — ne laisse jamais 2 actifs en même temps.</li>
-        <li>Fire Fist OP15 réduit à 0 → KO avec trash 2 cartes.</li>
-        <li>Tu génères plus de ressources qu'il n'en a. <strong>Sois patient.</strong></li>
-      </ul>
-    </div>
-
-    <div class="mu-card" style="border-color:rgba(192,57,43,0.25);">
-      <div class="mu-head">
-        <span class="mu-name">Nami bleu/jaune</span>
-        <span class="mu-pct">24 % méta</span>
-      </div>
-      <span class="mu-verdict vj">Jouable — précision requise</span>
-      <ul>
-        <li><strong>Chaque dégât = elle pioche.</strong> N'attaque que si tu la menaces vraiment.</li>
-        <li>Robin : tue par effet uniquement — BBP + Koala. Jamais en combat (trigger KO).</li>
-        <li>4+ Events au Trash → Just Watch Me à 1 Don = disruption permanente.</li>
-        <li><strong>Objectif :</strong> fermer avant le tour 8–9.</li>
-      </ul>
-    </div>
-
-    <div class="mu-card">
-      <div class="mu-head">
-        <span class="mu-name">Ace rouge/bleu</span>
-        <span class="mu-pct">4 % méta</span>
-      </div>
-      <span class="mu-verdict vf">Favorable</span>
-      <ul>
-        <li>Tu génères plus de valeur à chaque tour.</li>
-        <li>Fire Fist passe sous ses corps à 6000. Sabo Blocker 9000 coupe ses finishing turns.</li>
-      </ul>
-    </div>
-
-    <div class="mu-card">
-      <div class="mu-head">
-        <span class="mu-name">Luffy vert/violet</span>
-        <span class="mu-pct">4 % méta</span>
-      </div>
-      <span class="mu-verdict vf">Favorable</span>
-      <ul>
-        <li>BBP coupe son ramp en priorité dès qu'il pose un Perso clé.</li>
-        <li>Tu counter-scales son moteur plus vite qu'il ne peut scale.</li>
-      </ul>
-    </div>
-
-    <div class="mu-card">
-      <div class="mu-head">
-        <span class="mu-name">Imu noir</span>
-        <span class="mu-pct">—</span>
-      </div>
-      <span class="mu-verdict vj">Jouable — mulligan critique</span>
-      <ul>
-        <li>OP15-054 (2e effet) renvoie The Empty Throne en main = win instantané.</li>
-        <li>Bartolomeo résiste aux effets KO d'Imu (Indestructible).</li>
-        <li><strong>Mulligan toujours</strong> pour trouver OP15-054 dans ce matchup.</li>
-      </ul>
-    </div>
-  </div>
-
-  
-  <!-- Protocole Nami -->
-  <div class="nami-box" style="margin-top:6px;">
-    <h4>Protocole Anti-Nami — 4 lois</h4>
-    <div class="nami-rule">
-      <span class="nr-num">①</span>
-      <p class="nr-text"><strong>N'attaque que si tu menaces réellement sa Vie</strong> — chaque Life pris = elle pioche et scale.</p>
-    </div>
-    <div class="nami-rule">
-      <span class="nr-num">②</span>
-      <p class="nr-text"><strong>Robin = effet uniquement.</strong> Koala + BBP. Jamais en combat pour éviter son trigger KO.</p>
-    </div>
-    <div class="nami-rule">
-      <span class="nr-num">③</span>
-      <p class="nr-text"><strong>4+ Events au Trash</strong> → Just Watch Me à 1 Don. Disruption économique constante.</p>
-    </div>
-    <div class="nami-rule">
-      <span class="nr-num">④</span>
-      <p class="nr-text"><strong>Ferme avant le tour 8–9</strong> — après, sa board control devient ingérable.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────── 07 CHAMPION ─────────── -->
-<section class="section scroll-target" id="s7">
-  <div class="sec-header">
-    <span class="sec-num">07</span>
-    <span class="sec-title">Comportement de champion</span>
-  </div>
-  <p class="memo">Zéro erreur évitable au tournoi</p>
-
-  <div class="tip-row" style="margin-top:14px;">
-    <div class="tip-card">
-      <h4>Mulligan de fer</h4>
-      <div class="mull-grid">
-        <div class="mull-item mi-keep">
-          <span class="mi-icon" style="color:#1ABC9C;">✓</span>
-          <p class="mi-text"><strong>Garder absolument :</strong> Dressrosa Kingdom, Viola ou Rebecca (×1 min), 1 Event coût ≥3.</p>
+    <section class="section" id="courbe">
+        <div class="sec-header">
+            <span class="sec-title">LA COURBE D'OR</span>
         </div>
-        <div class="mull-item mi-reject">
-          <span class="mi-icon" style="color:var(--red-light);">✗</span>
-          <p class="mi-text"><strong>Rejeter :</strong> Sabo OP15 seul en opening, Fire Fist OP15-020 trop tôt (trop coûteux).</p>
+        <span class="memo">OBJECTIF : 1 → 3 → 5 → 7 → 10</span>
+        
+        <div class="cards-grid">
+            <div class="tcg-card"><img src="images/dres.png"><p>Stage</p></div>
+            <div class="tcg-card"><img src="images/cavendish.png"><p>Cavendish</p></div>
+            <div class="tcg-card"><img src="images/sabo_046.png"><p>Sabo 9k</p></div>
         </div>
-        <div class="mull-item mi-nami">
-          <span class="mi-icon" style="color:#5DADE2;">!</span>
-          <p class="mi-text"><strong>Contre Nami :</strong> BBP + Koala en priorité absolue, avant tout le reste.</p>
+
+        <div class="timeline-step">
+            <div class="step-num">1</div>
+            <div class="step-desc"><h3>Tour 1 : Stage</h3><p>Pose le Royaume de Dressrosa. C'est ton moteur de pioche.</p></div>
         </div>
-      </div>
-    </div>
+        <div class="timeline-step">
+            <div class="step-num">3</div>
+            <div class="step-desc"><h3>Tour 2 : Setup</h3><p>Garde 2 DON actifs pour Fire Fist / Contre.</p></div>
+        </div>
+        <div class="timeline-step">
+            <div class="step-num">5</div>
+            <div class="step-desc"><h3>Tour 3 : Cavendish</h3><p>Pose ton moteur. Attaque et pioche 2 cartes.</p></div>
+        </div>
+    </section>
 
-    <div class="tip-card">
-      <h4>Communication table</h4>
-      <ul>
-        <li>Annonce chaque effet : <em>"Effet Leader"</em>, <em>"Attaque à 7000"</em>.</li>
-        <li>Annonce la fin de chaque phase : <em>"Fin d'attaque"</em>, <em>"Fin de tour"</em>.</li>
-        <li>Si doute sur une règle : <strong>appelle un juge</strong>, jamais de règlement verbal à la table.</li>
-        <li>Ne touche jamais les cartes adverses sans permission explicite.</li>
-      </ul>
-    </div>
+    <section class="section" id="combos">
+        <div class="sec-header"><span class="sec-title">COMBOS CRITIQUES</span></div>
+        
+        <div class="card-box">
+            <h3>Sabo-Nuke (7 DON)</h3>
+            <p>Joue Sabo (7) → Lance Fire Fist (gratuit) → -8000 sur un ennemi → KO.</p>
+        </div>
 
-    <div class="tip-card">
-      <h4>Gestion mentale</h4>
-      <ul>
-        <li>Après une défaite : note <em>une seule faute précise</em>, puis passe à autre chose.</li>
-        <li>À 5 min restantes : évalue si tu peux gagner. Sinon, switch en défense totale pour le nul.</li>
-        <li>Ce deck a des séquences longues — <strong>prends le temps qu'il faut</strong>, ne joue pas vite sous pression.</li>
-        <li>Hydrate-toi entre chaque ronde. Simple mais décisif sur 6–7 rondes.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+        <div class="cards-grid">
+            <div class="tcg-card"><img src="images/fire_fist.png"><p>Fire Fist</p></div>
+            <div class="tcg-card"><img src="images/koala.png"><p>Koala</p></div>
+            <div class="tcg-card"><img src="images/bbp.png"><p>BBP Pistol</p></div>
+        </div>
 
+        <div class="card-box" style="border-left-color: var(--gold);">
+            <h3>Le Sniper (6 DON)</h3>
+            <p>Koala (-1000) + Barrier-Barrier Pistol → Renvoie un Perso 7000 au fond du deck.</p>
+        </div>
+    </section>
+
+    <section class="section" id="defense">
+        <div class="sec-header"><span class="sec-title">RÈGLES DE SURVIE</span></div>
+        <span class="memo">"Sauve le moteur, laisse mourir l'huile"</span>
+        <div class="card-box" style="border-left-color: #2E86C1;">
+            <h3>Défense Prioritaire : Cavendish</h3>
+            <p>S'il meurt, tu perds ton gaz. Utilise tes +2000 (Viola/Sabo) uniquement pour lui.</p>
+        </div>
+        <div class="card-box" style="border-left-color: #888;">
+            <h3>Sacrifiables : Rebecca / Viola</h3>
+            <p>Une fois posées, elles ne servent plus. Ne gaspille rien pour elles.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="sec-header"><span class="sec-title">MAIN DE DÉPART</span></div>
+        <p style="font-size:13px; margin-bottom:10px;"><strong>GARDE SI :</strong> Stage (Dressrosa Kingdom) + 1 Chercheuse.</p>
+        <p style="font-size:13px; color: var(--red-light);"><strong>CHANGE SI :</strong> Que des Events ou que des Sabo 7-cost.</p>
+    </section>
 </main>
 
-<footer>
-  <p>Lucy OP15-002 · Guide Tournoi · Format OP15 · Avril 2026</p>
-  <p style="margin-top:4px;">Méta : Enel 44% · Nami 24% · Ace 4% · Luffy 4%</p>
-</footer>
+<div class="footer">
+    <p>GUIDE CRÉÉ POUR LE TOURNOI OP15 — BONNE CHANCE PIRATE !</p>
+</div>
 
 </body>
 </html>
